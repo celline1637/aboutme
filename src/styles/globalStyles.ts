@@ -14,7 +14,8 @@ ${reset}
   }
 
   html{
-    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+    font-family: 'Vollkorn', serif;
+
     
   }
 

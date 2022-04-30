@@ -46,30 +46,16 @@ const posCenter = (type = 'absolute') => {
   `;
 };
 
-const colors = {
-  primary100: '#FFAF89',
-  primary200: '#f8824a',
-  primary300: '#f75f16',
-  gray100: '#e7e7e7',
-  gray200: '#BCBABA',
-  gray300: '#8D8D8D',
-  pending: '#FFE37C',
-  reject: '#FFAABF',
-  done: '#D3E9EB',
-  white: '#fff',
-  black: '#252525',
-};
-
 const theme = {
   calcRem,
   calcP,
   calcVw,
-  colors,
   flexSet,
   flexColumnSet,
   posCenterX,
   posCenterY,
   posCenter,
+  mobile: 'screen and (max-width: 768px)',
 };
 
 export default theme;
