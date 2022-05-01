@@ -1,33 +1,63 @@
 import { useRecoilValue } from 'recoil';
 import { pageState } from '../recoil/atoms';
-import NavButton from './GnbButton';
+import GnbButton from './GnbButton';
 import { GnbLink } from './GnbLink';
 import { Pagination } from './Pagination';
 import Resume from '../assets/frontend_sunkyung.pdf';
-import styled from 'styled-components/macro';
 
 const Gnb = () => {
   const currentPage = useRecoilValue(pageState);
+
   const goToBanner = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const goToTargetScroll = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const page = e.currentTarget.value;
+    window.scrollTo({
+      top: document.body.scrollHeight * ((parseInt(page) - 1) / 4),
+      // behavior: 'smooth',
+    });
+  };
+
   return (
     <nav>
-      <NavButton top left mixed value="smile" onClick={goToBanner}>
+      <GnbButton top left mixed value="smile" onClick={goToBanner}>
         : )
-      </NavButton>
-      <NavButton x={30} top right mixed>
+      </GnbButton>
+      <GnbButton
+        x={30}
+        top
+        right
+        mixed
+        value="2"
+        onClick={goToTargetScroll}
+        isActive={currentPage.current === 2}
+      >
         Skills
-      </NavButton>
-      <NavButton top right mixed>
-        Projects
-      </NavButton>
-      <NavButton bottom left mixed>
+      </GnbButton>
+      <GnbButton
+        top
+        right
+        mixed
+        value="3"
+        onClick={goToTargetScroll}
+        isActive={currentPage.current === 3}
+      >
+        History
+      </GnbButton>
+      <GnbButton
+        bottom
+        left
+        mixed
+        value="4"
+        onClick={goToTargetScroll}
+        isActive={currentPage.current === 4}
+      >
         About
-      </NavButton>
+      </GnbButton>
       {currentPage.current === 1 ? (
-        <NavButton
+        <GnbButton
           bottom
           right
           onClick={() => {
@@ -38,7 +68,7 @@ const Gnb = () => {
           }}
         >
           Scroll <span>&gt;</span>
-        </NavButton>
+        </GnbButton>
       ) : (
         <Pagination />
       )}
@@ -51,9 +81,5 @@ const Gnb = () => {
     </nav>
   );
 };
-
-const Skill = styled(NavButton)<{ x: number }>`
-  left: ${({ x }) => `${x}%`};
-`;
 
 export default Gnb;

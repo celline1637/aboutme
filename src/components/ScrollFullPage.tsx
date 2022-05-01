@@ -16,7 +16,7 @@ const ScrollFullPage = ({ page, bgc = 'bgc', title, children }: propTypes) => {
 
   const observeElement = () => {
     window.scrollTo({
-      top: document.body.scrollHeight * (page === 1 ? 0 : (page - 1) / 3),
+      top: (document.body.scrollHeight * (page - 1)) / 4,
       behavior: 'smooth',
     });
     setPage(prev => {
