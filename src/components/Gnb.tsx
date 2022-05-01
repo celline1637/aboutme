@@ -1,15 +1,29 @@
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { pageState } from '../recoil/atoms';
 import NavButton from './GnbButton';
 import { GnbLink } from './GnbLink';
 import { Pagination } from './Pagination';
 import Resume from '../assets/frontend_sunkyung.pdf';
-import styled from 'styled-components/macro';
+import React from 'react';
 
 const Gnb = () => {
-  const currentPage = useRecoilValue(pageState);
+  const [currentPage, setCurrentPage] = useRecoilState(pageState);
   const goToBanner = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    setCurrentPage(prev => {
+      return { ...prev, current: 1 };
+    });
+  };
+
+  const goToTargetScroll = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const page = e.currentTarget.value;
+    setCurrentPage(prev => {
+      return { ...prev, current: parseInt(page) };
+    });
+    window.scrollTo({
+      top: document.body.scrollHeight * ((parseInt(page) - 1) / 4),
+      // behavior: 'smooth',
+    });
   };
 
   return (
@@ -17,13 +31,36 @@ const Gnb = () => {
       <NavButton top left mixed value="smile" onClick={goToBanner}>
         : )
       </NavButton>
-      <NavButton x={30} top right mixed>
+      <NavButton
+        x={30}
+        top
+        right
+        mixed
+        value="2"
+        onClick={goToTargetScroll}
+        isActive={currentPage.current === 2}
+      >
         Skills
       </NavButton>
-      <NavButton top right mixed>
-        Projects
+
+      <NavButton
+        top
+        right
+        mixed
+        value="3"
+        onClick={goToTargetScroll}
+        isActive={currentPage.current === 3}
+      >
+        History
       </NavButton>
-      <NavButton bottom left mixed>
+      <NavButton
+        bottom
+        left
+        mixed
+        value="4"
+        onClick={goToTargetScroll}
+        isActive={currentPage.current === 4}
+      >
         About
       </NavButton>
       {currentPage.current === 1 ? (
@@ -32,7 +69,7 @@ const Gnb = () => {
           right
           onClick={() => {
             window.scrollTo({
-              top: document.body.scrollHeight * (1 / 3),
+              top: document.body.scrollHeight * (1 / 4),
               behavior: 'smooth',
             });
           }}
@@ -51,9 +88,5 @@ const Gnb = () => {
     </nav>
   );
 };
-
-const Skill = styled(NavButton)<{ x: number }>`
-  left: ${({ x }) => `${x}%`};
-`;
 
 export default Gnb;

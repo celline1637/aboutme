@@ -1,8 +1,7 @@
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import useIntersectionObserver from '../hook/useIntersectionObserver';
-import { pageState, typingAnimationState } from '../recoil/atoms';
-
+import { pageState } from '../recoil/atoms';
 interface propTypes {
   page: number;
   bgc?: string;
@@ -11,26 +10,21 @@ interface propTypes {
 }
 
 const ScrollFullPage = ({ page, bgc = 'bgc', title, children }: propTypes) => {
-  const setTypingAnimation = useSetRecoilState(typingAnimationState);
-  const setPage = useSetRecoilState(pageState);
-
-  const observeElement = () => {
-    window.scrollTo({
-      top: document.body.scrollHeight * (page === 1 ? 0 : (page - 1) / 3),
-      behavior: 'smooth',
-    });
-    setPage(prev => {
-      return { ...prev, current: page };
-    });
-    setTypingAnimation(prev => !prev);
-  };
-
+  const [crrentPage, setCrrentPage] = useRecoilState(pageState);
   const onIntersect: IntersectionObserverCallback = async (
     [entry],
     observer
   ) => {
     if (entry.isIntersecting) {
-      observeElement();
+      window.scrollTo({
+        top: document.body.scrollHeight * ((page - 1) / 4),
+        behavior: 'smooth',
+      });
+
+      setCrrentPage(prev => {
+        return { ...prev, current: page };
+      });
+
       observer.observe(entry.target);
     }
   };
@@ -41,6 +35,7 @@ const ScrollFullPage = ({ page, bgc = 'bgc', title, children }: propTypes) => {
     threshold: 0.1,
     onIntersect,
   });
+
   return (
     <Wrapper ref={setTarget} bgc={bgc}>
       <h2 aria-label={`page about ${title}`}>{title}</h2>

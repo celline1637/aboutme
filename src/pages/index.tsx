@@ -3,7 +3,8 @@ import IntroSection from './IntroSection';
 import { Cursor } from '../components/Cursor';
 import Gnb from '../components/Gnb';
 import { SkillsSection } from './SkillsSection';
-import { HistorySection } from './HIistorySection';
+import { HistorySection } from './HistorySection';
+import { AboutSection } from './AboutSection';
 
 const Main = () => {
   return (
@@ -14,6 +15,7 @@ const Main = () => {
         <IntroSection />
         <SkillsSection />
         <HistorySection />
+        <AboutSection />
       </Wrapper>
     </>
   );

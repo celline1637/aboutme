@@ -9,6 +9,7 @@ interface propTypes {
   mixed?: boolean;
   color?: string;
   value?: string;
+  isActive?: boolean;
   onClick?: React.MouseEventHandler;
   children?: React.ReactNode;
 }
@@ -20,8 +21,9 @@ const MenuButton = ({
   bottom,
   right,
   mixed,
-  value,
+  isActive,
   onClick,
+  value,
   color = 'main',
   children,
 }: propTypes) => {
@@ -34,6 +36,7 @@ const MenuButton = ({
       left={left}
       mixed={mixed}
       value={value}
+      isActive={isActive}
       x={x}
       type="button"
       onClick={onClick}
@@ -49,13 +52,14 @@ const NavBtn = styled.button<{
   bottom?: boolean;
   right?: boolean;
   mixed?: boolean;
+  isActive?: boolean;
   x?: number;
 }>`
   ${({ theme }) => theme.flexColumnSet()};
   margin: 1rem;
   padding: 2rem 2.4rem;
   position: fixed;
-  z-index: 99;
+  z-index: 9;
   color: ${({ theme }) => theme.colors.main};
   font-size: 4vw;
   font-weight: 500;
@@ -118,6 +122,24 @@ const NavBtn = styled.button<{
     transition: all 0.4s ease;
   }
 
+  &:active {
+    border: 0.4rem solid ${({ theme }) => theme.colors.main};
+    border-radius: 50%;
+    color: ${({ theme }) => theme.colors.bgc};
+    background-color: ${({ theme }) => theme.colors.main};
+    transition: all 0.4s ease;
+  }
+
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      border: 0.4rem solid ${({ theme }) => theme.colors.main};
+      border-radius: 50%;
+      color: ${({ theme }) => theme.colors.bgc};
+      background-color: ${({ theme }) => theme.colors.main};
+      transition: all 0.4s ease;
+    `};
+
   ${({ value }) =>
     value === 'smile' &&
     css`
@@ -135,13 +157,6 @@ const NavBtn = styled.button<{
         }
       }
     `};
-  &:active {
-    border: 0.4rem solid ${({ theme }) => theme.colors.main};
-    border-radius: 50%;
-    color: ${({ theme }) => theme.colors.bgc};
-    background-color: ${({ theme }) => theme.colors.main};
-    transition: all 0.4s ease;
-  }
 `;
 
 export default MenuButton;
