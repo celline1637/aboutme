@@ -30,7 +30,6 @@ const ScrollFullPage = ({ page, bgc = 'bgc', title, children }: propTypes) => {
     observer
   ) => {
     if (entry.isIntersecting) {
-      console.log(entry.target);
       observeElement();
       observer.observe(entry.target);
     }

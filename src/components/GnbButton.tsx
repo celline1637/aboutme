@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components/macro';
 
 interface propTypes {
+  x?: number;
   top?: boolean;
   left?: boolean;
   bottom?: boolean;
@@ -13,6 +14,7 @@ interface propTypes {
 }
 
 const MenuButton = ({
+  x,
   top,
   left,
   bottom,
@@ -32,6 +34,7 @@ const MenuButton = ({
       left={left}
       mixed={mixed}
       value={value}
+      x={x}
       type="button"
       onClick={onClick}
     >
@@ -46,6 +49,7 @@ const NavBtn = styled.button<{
   bottom?: boolean;
   right?: boolean;
   mixed?: boolean;
+  x?: number;
 }>`
   ${({ theme }) => theme.flexColumnSet()};
   margin: 1rem;
@@ -82,6 +86,12 @@ const NavBtn = styled.button<{
     right &&
     css`
       right: 0;
+    `};
+
+  ${({ x }) =>
+    x &&
+    css`
+      right: ${x}%;
     `};
 
   @media (min-width: 1000px) {

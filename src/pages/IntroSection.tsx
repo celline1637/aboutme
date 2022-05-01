@@ -18,7 +18,7 @@ const TextWrapper = styled.div`
   height: 100%;
   background-color: ${({ theme }) => theme.colors.bgc};
   font-family: 'Vollkorn', serif;
-  font-size: 5.8vw;
+  font-size: 6.6vw;
   line-height: 1.2;
   color: ${({ theme }) => theme.colors.main};
   ${({ theme }) => theme.flexColumnSet()}

@@ -6,6 +6,7 @@ import { pageState } from '../recoil/atoms';
 export const Cursor = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+
   const page = useRecoilValue(pageState);
 
   const checkDevice = () => {
@@ -13,22 +14,24 @@ export const Cursor = () => {
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
         navigator.userAgent
       );
-    if (window.innerWidth > 750)
-      isMobile ? setIsMobile(true) : setIsMobile(false);
+
+    isMobile ? setIsMobile(true) : setIsMobile(false);
   };
 
   const setCursorLocation = (target: HTMLDivElement) => {
     document.addEventListener('mousemove', e => {
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
-      target.style.left = mouseX + 'px';
-      target.style.top = mouseY + 'px';
+      target.style.left = `${e.clientX}px`;
+      target.style.top = `${e.clientY}px`;
     });
   };
 
   useEffect(() => {
     checkDevice();
     if (ref.current) {
+      if (isMobile)
+        document.removeEventListener('mousemove', () => {
+          setCursorLocation(circle);
+        });
       const circle = ref.current;
       document.addEventListener('mousemove', () => {
         setCursorLocation(circle);
@@ -44,12 +47,12 @@ export const Cursor = () => {
     };
   }, []);
 
-  return !isMobile && page.current === 1 ? (
-    <Circle id="circle" ref={ref} />
+  return page.current === 1 ? (
+    <Circle id="circle" ref={ref} isMobile={isMobile} />
   ) : null;
 };
 
-const Circle = styled.div`
+const Circle = styled.div<{ isMobile: boolean }>`
   width: 300px;
   height: 300px;
   border-radius: 50%;

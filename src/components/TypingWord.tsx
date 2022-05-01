@@ -44,7 +44,6 @@ const TypingWord = ({
   const returnLastMatch = (string1: string, string2: string) => {
     let i = 0;
     let j = 0;
-    console.log(string1);
     for (; i < string1.length && j < string2.length; i++, j++) {
       if (string1.charAt(i) !== string2.charAt(j)) return i - 1;
     }
@@ -58,7 +57,6 @@ const TypingWord = ({
 
     if (currentTextContent.length === currentTextLength) {
       // Check if end of text has been reached
-      console.log(currentText.index);
 
       if (currentText.index === textList.length - 1) {
         setCurrentText({
@@ -89,7 +87,6 @@ const TypingWord = ({
     }
     if (currentTextLength === 0 && currentText.isDeleting) {
       // Entire text has been deleted then switch to the next text
-      console.log(currentText.index);
       setCurrentText({
         index: currentIndex + 1,
         text: textList[currentIndex + 1],
@@ -131,8 +128,6 @@ const TypingWord = ({
   }, [updateText, setTimeOutSpeed]);
 
   const stringToRender = currentText.text.substr(0, currentText.length);
-
-  console.log(stringToRender);
 
   return <Wrapper>{stringToRender}</Wrapper>;
 };
