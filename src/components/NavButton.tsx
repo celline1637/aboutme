@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components/macro';
 
 interface propTypes {
   top?: boolean;
@@ -56,6 +56,7 @@ const NavBtn = styled.button<{
   font-size: 4vw;
   font-weight: 500;
   border-radius: 50%;
+  transition: all 0.4s ease;
 
   ${({ mixed }) =>
     mixed &&

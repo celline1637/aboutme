@@ -1,19 +1,14 @@
-import React from 'react';
 import styled from 'styled-components';
 import ScrollFullPage from './ScrollFullPage';
-import TypingWord from './TypingWord';
 
 const Banner = () => {
   return (
-    <ScrollFullPage scrollTop={0}>
+    <ScrollFullPage page={1}>
       <Wrapper>
         <TextWrapper>
           <Line>Hi!</Line>
           <Line>I am Sunkyung,</Line>
-          <Line>
-            {/* <TypingWord textList={['front', 'flutter']} /> */}
-            front-end developer.
-          </Line>
+          <Line>front-end developer.</Line>
         </TextWrapper>
       </Wrapper>
     </ScrollFullPage>
@@ -27,6 +22,7 @@ const Wrapper = styled.div`
   font-size: 5.8vw;
   line-height: 1.2;
   color: ${({ theme }) => theme.colors.main};
+  overflow: hidden;
 `;
 
 const TextWrapper = styled.div`

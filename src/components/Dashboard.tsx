@@ -2,13 +2,13 @@ import styled from 'styled-components';
 import ScrollFullPage from './ScrollFullPage';
 
 interface propTypes {
-  index: number;
+  page: number;
   color?: string;
 }
 
-const Dashboard = ({ index, color = 'main' }: propTypes) => {
+const Dashboard = ({ page, color = 'main' }: propTypes) => {
   return (
-    <ScrollFullPage scrollTop={index}>
+    <ScrollFullPage page={page}>
       <Wrapper color={color}></Wrapper>
     </ScrollFullPage>
   );

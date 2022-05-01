@@ -9,3 +9,11 @@ export const typingAnimationState = atom({
   key: 'typingAnimationState',
   default: false,
 });
+
+export const pageState = atom({
+  key: 'pageState',
+  default: {
+    current: 1,
+    total: 3,
+  },
+});
