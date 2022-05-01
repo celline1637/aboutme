@@ -1,96 +1,67 @@
 import styled, { css } from 'styled-components';
+import MyPDF from '../assets/frontend_sunkyung.pdf';
 
 interface propTypes {
-  top?: boolean;
-  left?: boolean;
-  bottom?: boolean;
-  right?: boolean;
-  mixed?: boolean;
-  index: number;
-  color?: string;
+  top?: number;
+  left?: number;
+  bottom?: number;
+  right?: number;
 }
 
-const NavButton = ({
-  top,
-  left,
-  bottom,
-  right,
-  mixed,
-  color = 'main',
-}: propTypes) => {
+const BottomLinks = ({ top, left, bottom, right }: propTypes) => {
   return (
-    <NavBtn
-      color={color}
-      top={top}
-      bottom={bottom}
-      right={right}
-      left={left}
-      mixed={mixed}
-      type="button"
-    >
-      : )
-    </NavBtn>
+    <>
+      <NavBtn left={30} href="mailto:cellin1637@gmail.com">
+        Email
+      </NavBtn>
+      <NavBtn left={50} href={MyPDF} download="주니어 프론트엔드_노선경.pdf">
+        Resume
+      </NavBtn>
+    </>
   );
 };
 
-const NavBtn = styled.button<{
-  top?: boolean;
-  left?: boolean;
-  bottom?: boolean;
-  right?: boolean;
-  mixed?: boolean;
+const NavBtn = styled.a<{
+  top?: number;
+  left?: number;
+  bottom?: number;
+  right?: number;
 }>`
   ${({ theme }) => theme.flexColumnSet()};
+  margin: 1rem;
   padding: 2rem 2.4rem;
-  z-index: 99;
   color: ${({ theme }) => theme.colors.main};
   font-size: 4vw;
   font-weight: 500;
+  mix-blend-mode: difference;
   position: fixed;
+  bottom: 0;
+  border-radius: 50%;
 
-  ${({ mixed }) =>
-    mixed &&
-    css`
-      mix-blend-mode: difference;
-    `};
-  ${({ top }) =>
-    top &&
-    css`
-      top: 0;
-    `};
-  ${({ bottom }) =>
-    bottom &&
-    css`
-      bottom: 0;
-    `};
   ${({ left }) =>
     left &&
     css`
-      left: 0;
+      left: ${left}%;
     `};
-  ${({ right }) =>
-    right &&
-    css`
-      right: 0;
-    `};
+  z-index: 99;
 
   @media (min-width: 1000px) {
     font-size: 2rem;
   }
 
-  & > span {
-    transform: rotate(90deg);
-    animation: motion 1s linear 0s infinite alternate;
+  &:hover {
+    border: 0.4rem solid ${({ theme }) => theme.colors.main};
+    border-radius: 50%;
+    transition: all 0.4s ease;
   }
 
-  @keyframes motion {
-    0% {
-      margin-bottom: 0px;
-    }
-    100% {
-      margin-bottom: 10px;
-    }
+  &:active {
+    border: 0.4rem solid ${({ theme }) => theme.colors.main};
+    border-radius: 50%;
+    color: ${({ theme }) => theme.colors.bgc};
+    background-color: ${({ theme }) => theme.colors.main};
+    transition: all 0.4s ease;
   }
 `;
 
-export default NavButton;
+export default BottomLinks;

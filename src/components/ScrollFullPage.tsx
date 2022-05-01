@@ -1,4 +1,6 @@
+import { useSetRecoilState } from 'recoil';
 import useIntersectionObserver from '../hook/useIntersectionObserver';
+import { typingAnimationState } from '../recoil/atoms';
 
 interface propTypes {
   scrollTop: number;
@@ -6,16 +8,21 @@ interface propTypes {
 }
 
 const ScrollFullPage = ({ scrollTop, children }: propTypes) => {
+  const setTypingAnimation = useSetRecoilState(typingAnimationState);
+
+  const observeElement = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight * scrollTop,
+      behavior: 'smooth',
+    });
+    setTypingAnimation(prev => !prev);
+  };
   const onIntersect: IntersectionObserverCallback = async (
     [entry],
     observer
   ) => {
     if (entry.isIntersecting) {
-      window.scrollTo({
-        top: document.body.scrollHeight * scrollTop,
-        behavior: 'smooth',
-      });
-
+      observeElement();
       observer.observe(entry.target);
     }
   };
