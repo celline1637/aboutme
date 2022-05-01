@@ -53,6 +53,7 @@ const Wrapper = styled.article<{ bgc: string }>`
   width: 100vw;
   height: 100vh;
   background-color: ${({ theme, bgc }) => theme.colors[bgc]};
+  position: relative;
 
   h2 {
     display: none;
