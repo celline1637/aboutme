@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ScrollFullPage from '../components/ScrollFullPage';
-import { SkillCard } from './Skill';
-import skills from './Skills';
+import { SkillCard } from '../components/Skill';
+import skills from '../assets/Skills';
 
 export const SkillsSection = () => {
   const [cat, setCat] = useState<string[]>([]);

@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import skills from '../pages/Skills';
+import skills from '../assets/Skills';
 
 export const darkMode = atom({
   key: 'darkmode',
