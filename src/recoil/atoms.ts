@@ -1,4 +1,4 @@
-import { atom, selector } from 'recoil';
+import { atom } from 'recoil';
 import skills from '../pages/Skills';
 
 export const darkMode = atom({
@@ -25,14 +25,3 @@ export const skillData = atom<object>({
     ...skills,
   },
 });
-
-// export const categoryData = selector({
-//   key: 'categoryData',
-//   get: async ({ get }) => {
-//     const skillData = get(skillData);
-//     const category = [];
-//     Object.values(skillData).map(el => {
-//       return category.push(...el.category);
-//     });
-//   },
-// });
