@@ -1,23 +1,40 @@
+import React from 'react';
 import styled, { css } from 'styled-components';
-import MyPDF from '../assets/frontend_sunkyung.pdf';
 
 interface propTypes {
+  href: string;
   top?: number;
   left?: number;
   bottom?: number;
   right?: number;
+  children?: React.ReactNode;
+  props?: any;
+  type?: string;
+  fileName?: string;
 }
 
-const BottomLinks = ({ top, left, bottom, right }: propTypes) => {
+export const GnbLink = ({
+  href,
+  top,
+  left,
+  bottom,
+  right,
+  children,
+  fileName,
+  ...props
+}: propTypes) => {
   return (
-    <>
-      <NavBtn left={30} href="mailto:cellin1637@gmail.com">
-        Email
-      </NavBtn>
-      <NavBtn left={50} href={MyPDF} download="주니어 프론트엔드_노선경.pdf">
-        Resume
-      </NavBtn>
-    </>
+    <NavBtn
+      top={top}
+      bottom={bottom}
+      right={right}
+      left={left}
+      href={href}
+      download={fileName}
+      {...props}
+    >
+      {children}
+    </NavBtn>
   );
 };
 
@@ -63,5 +80,3 @@ const NavBtn = styled.a<{
     transition: all 0.4s ease;
   }
 `;
-
-export default BottomLinks;

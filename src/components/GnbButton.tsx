@@ -12,7 +12,7 @@ interface propTypes {
   children?: React.ReactNode;
 }
 
-const NavButton = ({
+const MenuButton = ({
   top,
   left,
   bottom,
@@ -134,4 +134,4 @@ const NavBtn = styled.button<{
   }
 `;
 
-export default NavButton;
+export default MenuButton;

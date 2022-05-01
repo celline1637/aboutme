@@ -1,13 +1,16 @@
 import { useSetRecoilState } from 'recoil';
+import styled from 'styled-components';
 import useIntersectionObserver from '../hook/useIntersectionObserver';
 import { pageState, typingAnimationState } from '../recoil/atoms';
 
 interface propTypes {
   page: number;
+  bgc?: string;
+  title: string;
   children?: React.ReactNode;
 }
 
-const ScrollFullPage = ({ page, children }: propTypes) => {
+const ScrollFullPage = ({ page, bgc = 'bgc', title, children }: propTypes) => {
   const setTypingAnimation = useSetRecoilState(typingAnimationState);
   const setPage = useSetRecoilState(pageState);
 
@@ -39,7 +42,22 @@ const ScrollFullPage = ({ page, children }: propTypes) => {
     threshold: 0.1,
     onIntersect,
   });
-  return <div ref={setTarget}>{children}</div>;
+  return (
+    <Wrapper ref={setTarget} bgc={bgc}>
+      <h2>{title}</h2>
+      {children}
+    </Wrapper>
+  );
 };
+
+const Wrapper = styled.article<{ bgc: string }>`
+  width: 100vw;
+  height: 100vh;
+  background-color: ${({ theme, bgc }) => theme.colors[bgc]};
+
+  h2 {
+    visibility: hidden;
+  }
+`;
 
 export default ScrollFullPage;
