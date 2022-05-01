@@ -44,7 +44,7 @@ const ScrollFullPage = ({ page, bgc = 'bgc', title, children }: propTypes) => {
   });
   return (
     <Wrapper ref={setTarget} bgc={bgc}>
-      <h2>{title}</h2>
+      <h2 aria-label={`page about ${title}`}>{title}</h2>
       {children}
     </Wrapper>
   );
@@ -56,7 +56,7 @@ const Wrapper = styled.article<{ bgc: string }>`
   background-color: ${({ theme, bgc }) => theme.colors[bgc]};
 
   h2 {
-    visibility: hidden;
+    display: none;
   }
 `;
 
